@@ -3,7 +3,7 @@ let n1 = 1.0; // Refractive index of air
 let n2 = 1.51; // Default to window glass
 let canvasWidth = 1920;
 let canvasHeight = 1080;
-let materialSelect;
+let materialSelect1, materialSelect2;
 
 let materials = {
     "Luft": 1.00,
@@ -24,20 +24,29 @@ function setup() {
     angleSlider.position(20, 20);
     angleSlider.style('width', '200px');
     
-    // Dropdown menu for at vælge materiale
-    materialSelect = createSelect();
-    materialSelect.position(20, 50);
+    // Dropdown menu for at vælge materiale til n1
+    materialSelect1 = createSelect();
+    materialSelect1.position(20, 50);
     for (let mat in materials) {
-        materialSelect.option(mat);
+        materialSelect1.option(mat);
     }
-    materialSelect.selected("Rudeglas");
+    materialSelect1.selected("Luft");
+    
+    // Dropdown menu for at vælge materiale til n2
+    materialSelect2 = createSelect();
+    materialSelect2.position(20, 80);
+    for (let mat in materials) {
+        materialSelect2.option(mat);
+    }
+    materialSelect2.selected("Rudeglas");
 }
 
 function draw() {
     background(220);
     
     let incidentAngle = angleSlider.value();
-    n2 = materials[materialSelect.value()];
+    n1 = materials[materialSelect1.value()];
+    n2 = materials[materialSelect2.value()];
     let refractedAngle = asin((n1 / n2) * sin(incidentAngle));
     
     drawInterface(incidentAngle, refractedAngle);
@@ -52,10 +61,10 @@ function drawInterface(incidentAngle, refractedAngle) {
     
     fill(0);
     textSize(24);
-    text(`Indfaldsvinkel: ${incidentAngle.toFixed(1)}°`, 20, 90);
-    text(`Brydningsvinkel: ${isNaN(refractedAngle) ? 'Total refleksion' : refractedAngle.toFixed(1) + '°'}`, 20, 120);
-    text(`Materiale: ${materialSelect.value()}`, 20, 150);
-    text(`Brydningsindeks: ${n2.toFixed(2)}`, 20, 180);
+    text(`Indfaldsvinkel: ${incidentAngle.toFixed(1)}°`, 20, 120);
+    text(`Brydningsvinkel: ${isNaN(refractedAngle) ? 'Total refleksion' : refractedAngle.toFixed(1) + '°'}`, 20, 150);
+    text(`Materiale 1: ${materialSelect1.value()} (n1 = ${n1.toFixed(2)})`, 20, 180);
+    text(`Materiale 2: ${materialSelect2.value()} (n2 = ${n2.toFixed(2)})`, 20, 210);
 }
 
 function drawLightRays(incidentAngle, refractedAngle) {
