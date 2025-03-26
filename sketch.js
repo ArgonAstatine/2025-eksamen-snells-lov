@@ -1,6 +1,6 @@
 let angleSlider;
-let n1 = 1.0; // Refractive index of air
-let n2 = 1.51; // Default to window glass
+let n1 = 1.0;
+let n2 = 1.51;
 let canvasWidth = 1920;
 let canvasHeight = 1080;
 let materialSelect1, materialSelect2;
@@ -86,9 +86,9 @@ function drawLightRays(incidentAngle, refractedAngle) {
         stroke(0, 0, 255);
         line(centerX, centerY, refractedX, refractedY);
     } else {
-        // Total refleksion
-        let reflectedX = centerX - rayLength * cos(incidentAngle);
-        let reflectedY = centerY + rayLength * sin(incidentAngle);
+        // Total refleksion langs x-aksen
+        let reflectedX = centerX + rayLength * cos(incidentAngle);
+        let reflectedY = centerY - rayLength * sin(incidentAngle);
         stroke(255, 165, 0);
         line(centerX, centerY, reflectedX, reflectedY);
     }
