@@ -62,7 +62,7 @@ function drawInterface(incidentAngle, refractedAngle) {
     fill(0);
     textSize(24);
     text(`Indfaldsvinkel: ${incidentAngle.toFixed(1)}°`, 20, 120);
-    text(`Brydningsvinkel: ${isNaN(refractedAngle) ? 'Total refleksion' : refractedAngle.toFixed(1) + '°'}`, 20, 150);
+    text(`Brydningsvinkel: ${isNaN(refractedAngle) ? 'Totalrefleksion' : refractedAngle.toFixed(1) + '°'}`, 20, 150);
     text(`Materiale 1: ${materialSelect1.value()} (n1 = ${n1.toFixed(2)})`, 20, 180);
     text(`Materiale 2: ${materialSelect2.value()} (n2 = ${n2.toFixed(2)})`, 20, 210);
 }
@@ -86,7 +86,7 @@ function drawLightRays(incidentAngle, refractedAngle) {
         stroke(0, 0, 255);
         line(centerX, centerY, refractedX, refractedY);
     } else {
-        // Total refleksion langs x-aksen
+        // Totalrefleksion langs x-aksen
         let reflectedX = centerX + rayLength * cos(incidentAngle);
         let reflectedY = centerY - rayLength * sin(incidentAngle);
         stroke(255, 165, 0);
